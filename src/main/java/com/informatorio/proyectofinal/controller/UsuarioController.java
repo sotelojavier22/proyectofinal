@@ -3,17 +3,28 @@ package com.informatorio.proyectofinal.controller;
 import com.informatorio.proyectofinal.entity.Usuario;
 import com.informatorio.proyectofinal.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(value = "/usuario")
 public class UsuarioController {
-    @Autowired
+
     private UsuarioRepository repository;
-    @RequestMapping(value = "/usuarios", method = RequestMethod.GET)
-    public @ResponseBody Iterable<Usuario> findUsuarios(){
-        return repository.findAll();
+
+    @Autowired
+    public UsuarioController(UsuarioRepository repository){
+        this.repository = repository;
+    }
+
+    @GetMapping()
+    public ResponseEntity<?> findUsuarios(){
+        return new ResponseEntity(repository.findAll(),HttpStatus.OK);
+    }
+
+    @PostMapping()
+    public ResponseEntity<?> crear(@RequestBody Usuario usuario){
+        return new ResponseEntity(repository.save(usuario), HttpStatus.CREATED);
     }
 }
