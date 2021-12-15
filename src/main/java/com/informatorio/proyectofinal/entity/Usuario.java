@@ -1,11 +1,11 @@
 package com.informatorio.proyectofinal.entity;
 
+import com.informatorio.proyectofinal.util.ValidationHelper;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,15 +13,26 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "El nombre no puede ser blanco o nulo")
     private String nombre;
+    @NotBlank(message = "El apellido no puede ser blanco o nulo")
     private String apellido;
+    @NotBlank(message = "El email no puede ser blanco o nulo")
+    @Column(unique = true)
+    @Email(regexp = ValidationHelper.EMAIL_REGEX)
     private String email;
+    @NotBlank(message = "El password no puede ser blanco o nulo")
     private String password;
     @CreationTimestamp
     private LocalDateTime fechaCreacion;
+    @NotBlank(message = "La ciudad no puede ser blanco o nulo")
     private String ciudad;
+    @NotBlank(message = "La provincia no puede ser blanco o nulo")
     private String provincia;
+    @NotBlank(message = "El país no puede ser blanco o nulo")
     private String pais;
+    @NotBlank(message = "El tipo no puede ser blanco o nulo")
     private String tipo;
 
     public Usuario() {
@@ -54,9 +65,6 @@ public class Usuario {
         return email;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
     public LocalDateTime getFechaCreacion() {
         return fechaCreacion;

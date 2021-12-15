@@ -3,9 +3,11 @@ package com.informatorio.proyectofinal.config;
 import com.informatorio.proyectofinal.entity.Emprendimiento;
 import com.informatorio.proyectofinal.entity.Evento;
 import com.informatorio.proyectofinal.entity.Usuario;
+import com.informatorio.proyectofinal.entity.Voto;
 import com.informatorio.proyectofinal.repository.EmprendimientoRepository;
 import com.informatorio.proyectofinal.repository.EventoRepository;
 import com.informatorio.proyectofinal.repository.UsuarioRepository;
+import com.informatorio.proyectofinal.repository.VotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -21,6 +23,8 @@ public class UsuarioRunner implements CommandLineRunner {
     private EmprendimientoRepository emprendimientoRepository;
     @Autowired
     private EventoRepository eventoRepository;
+    @Autowired
+    private VotoRepository votoRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -34,6 +38,17 @@ public class UsuarioRunner implements CommandLineRunner {
         usuario.setProvincia("Chaco");
         usuario.setTipo("OWNER");
         usuario = usuarioRepository.save(usuario);
+
+        Usuario usuario1 = new Usuario();
+        usuario1.setNombre("Karina");
+        usuario1.setApellido("Vargas");
+        usuario1.setCiudad("Formosa");
+        usuario1.setEmail("karinavargas@gmail.com");
+        usuario1.setPais("Argentina");
+        usuario1.setPassword("123456");
+        usuario1.setProvincia("Formosa");
+        usuario1.setTipo("COLABORADOR");
+        usuario1 = usuarioRepository.save(usuario1);
 
         Emprendimiento emprendimiento = new Emprendimiento();
         emprendimiento.setNombre("TriviaChaco");
@@ -53,6 +68,20 @@ public class UsuarioRunner implements CommandLineRunner {
 
         evento = eventoRepository.save(evento);
 
+        Voto voto = new Voto();
+        voto.setUsuario("karinavargas@gmail.com");
+        voto.setGeneradoPor("Web");
+        voto = votoRepository.save(voto);
+
+        Voto voto1 = new Voto();
+        voto1.setUsuario("karinavargas@gmail.com");
+        voto1.setGeneradoPor("Web");
+        voto1 = votoRepository.save(voto1);
+
+        Voto voto2 = new Voto();
+        voto2.setUsuario("sotelojavier22@gmail.com");
+        voto2.setGeneradoPor("Web");
+        voto2 = votoRepository.save(voto2);
 
     }
 }

@@ -19,12 +19,33 @@ public class EmprendimientoController {
     }
 
     @GetMapping
-    public ResponseEntity <?> obtenerEmprendimientos() {
+    public ResponseEntity <?> obtenerEmprendimientos(@RequestParam(name = "publicado",required = false)
+                                                     Boolean publicado) {
+        if (publicado != null) {
+            return new ResponseEntity(repository.findByPublicado(publicado),HttpStatus.OK);
+        }
         return new ResponseEntity(repository.findAll(), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    public Emprendimiento obtenerEmprendimientoPorId(@PathVariable("id") Long id){
+        return repository.findById(id).get();
+    }
+
     @PostMapping
-    public ResponseEntity<?> crear(@RequestBody Emprendimiento emprendimiento){
+    public ResponseEntity<?> crearEmprendimiento(@RequestBody Emprendimiento emprendimiento){
         return new ResponseEntity(repository.save(emprendimiento),HttpStatus.CREATED);
     }
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
+    public Emprendimiento modificarEmprendimiento(@PathVariable("id") Long id,@RequestBody Emprendimiento emprendimiento){
+        Emprendimiento empExistente = repository.findById(id).get();
+        empExistente.setNombre(emprendimiento.getNombre());
+        empExistente.setDescripcion(emprendimiento.getDescripcion());
+        empExistente.setContenido(emprendimiento.getContenido());
+        empExistente.setPublicado(emprendimiento.getPublicado());
+        return repository.save(empExistente);
+    }
+
+
 }
