@@ -1,0 +1,399 @@
+{
+	"info": {
+		"_postman_id": "747b95d1-b9ce-4cde-89fe-f7a1b49e03c4",
+		"name": "Proyecto Final API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Obtener todos los Usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuario",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario"
+							],
+							"query": [
+								{
+									"key": "fechaCreacion",
+									"value": "2021-12-14",
+									"disabled": true
+								},
+								{
+									"key": "ciudad",
+									"value": "Resistencia",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n    {\r\n        \"nombre\": \"Carina\",\r\n        \"apellido\": \"Strusiat\",\r\n        \"email\": \"carina.strusiat@gmail.com\",\r\n        \"password\": \"654321\",\r\n        \"ciudad\": \"Resistencia\",\r\n        \"provincia\": \"Chaco\",\r\n        \"pais\": \"Argentina\",\r\n        \"tipo\": \"USUARIO\"\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/usuario",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener un Usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuario/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar un usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"nombre\": \"Carina\",\r\n        \"apellido\": \"Bargas\",\r\n        \"ciudad\": \"Corrientes\",\r\n        \"provincia\": \"Corrientes\",\r\n        \"pais\": \"Argentina\",\r\n        \"tipo\": \"USUARIO\"\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/usuario/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un Usurio",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuario/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Emprendimiento",
+			"item": [
+				{
+					"name": "Obtener todos los emprendimientos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/emprendimiento",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"emprendimiento"
+							],
+							"query": [
+								{
+									"key": "publicado",
+									"value": "true",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Emprendimiento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nombre\": \"TiendaChaco\",\r\n        \"descripcion\": \"Aplicación para vender productos\",\r\n        \"contenido\": \"Aplicación para tiendas en la provincia del Chaco\",\r\n        \"objetivo\": 22300.00,\r\n        \"publicado\": true,\r\n        \"url\": null,\r\n         \"tags\": [{\"nombre\": \"Juegos\"}]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/emprendimiento",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"emprendimiento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener un Emprendimiento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/emprendimiento/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"emprendimiento",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar un emprendimiento",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n        \"nombre\": \"TiendaChaco\",\r\n        \"descripcion\": \"Aplicación para vender productos y servicios\",\r\n        \"contenido\": \"Aplicación para tiendas en la provincia del Chaco\",\r\n        \"fechaCreacion\": \"2021-12-14T23:30:53.180677\",\r\n        \"objetivo\": 22300.00,\r\n        \"publicado\": true,\r\n        \"url\": null,\r\n        \"tags\": null\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/emprendimiento/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"emprendimiento",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Voto",
+			"item": [
+				{
+					"name": "Obtener todos los votos de un usuario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/voto?usuario=sotelojavier22@gmail.com",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"voto"
+							],
+							"query": [
+								{
+									"key": "usuario",
+									"value": "sotelojavier22@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Voto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "   {\r\n        \"generadoPor\": \"mobile\",\r\n        \"usuario\": \"sotelojavier22@gmail.com\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/voto",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"voto"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Evento",
+			"item": [
+				{
+					"name": "Obtener todos los eventos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/evento",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"evento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Evento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"detallesEvento\": \"Mejor trivia de juegos. Premio de $200000\",\r\n        \"fechaApertura\": \"2021-12-10\",\r\n        \"fechaCierre\": null,\r\n        \"estado\": \"ABIERTO\",\r\n        \"suscriptores\": null,\r\n        \"premio\": 200000.00\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/evento",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"evento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar un Evento",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"detallesEvento\": \"Mejor trivia de juegos. Premio de $200000\",\r\n        \"fechaApertura\": \"2021-12-10\",\r\n        \"fechaCierre\": \"2021-12-31\",\r\n        \"estado\": \"CERRADO\",\r\n        \"suscriptores\": null,\r\n        \"premio\": 200000.00\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/evento/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"evento",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -2,13 +2,12 @@ package com.informatorio.proyectofinal.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Emprendimiento {
@@ -24,19 +23,22 @@ public class Emprendimiento {
     private BigDecimal objetivo;
     private Boolean publicado;
     private String url;
-    private String tags;
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name = "emprendimiento_id")
+    private List<Voto> votos;
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @JoinTable(
+            name = "emprendimiento_tag",
+            joinColumns = @JoinColumn(name = "emprendimiento_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private List<Tag> tags = new ArrayList<>();
 
     public Emprendimiento() {
     }
 
-    public Emprendimiento(String nombre, String descripcion, String contenido, BigDecimal objetivo, Boolean publicado, String url, String tags) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.contenido = contenido;
-        this.objetivo = objetivo;
-        this.publicado = publicado;
-        this.url = url;
-        this.tags = tags;
+    public Emprendimiento(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
     public Long getId() {
@@ -71,10 +73,6 @@ public class Emprendimiento {
         return url;
     }
 
-    public String getTags() {
-        return tags;
-    }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -99,8 +97,30 @@ public class Emprendimiento {
         this.url = url;
     }
 
-    public void setTags(String tags) {
+    public List<Voto> getVotos() {
+        return votos;
+    }
+
+    public void setVotos(List<Voto> votos) {
+        this.votos = votos;
+    }
+
+    public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void agregarTag(Tag tag){
+        tags.add(tag);
+        tag.getEmprendimientos().add(this);
+    }
+
+    public void removerTag(Tag tag){
+        tags.remove(tag);
+        tag.getEmprendimientos().remove(null);
     }
 
     @Override

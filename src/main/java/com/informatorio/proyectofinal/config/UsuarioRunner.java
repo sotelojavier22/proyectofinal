@@ -1,18 +1,13 @@
 package com.informatorio.proyectofinal.config;
 
-import com.informatorio.proyectofinal.entity.Emprendimiento;
-import com.informatorio.proyectofinal.entity.Evento;
-import com.informatorio.proyectofinal.entity.Usuario;
-import com.informatorio.proyectofinal.entity.Voto;
-import com.informatorio.proyectofinal.repository.EmprendimientoRepository;
-import com.informatorio.proyectofinal.repository.EventoRepository;
-import com.informatorio.proyectofinal.repository.UsuarioRepository;
-import com.informatorio.proyectofinal.repository.VotoRepository;
+import com.informatorio.proyectofinal.entity.*;
+import com.informatorio.proyectofinal.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Component
 public class UsuarioRunner implements CommandLineRunner {
@@ -25,6 +20,8 @@ public class UsuarioRunner implements CommandLineRunner {
     private EventoRepository eventoRepository;
     @Autowired
     private VotoRepository votoRepository;
+    @Autowired
+    private TagRepository tagRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -47,17 +44,20 @@ public class UsuarioRunner implements CommandLineRunner {
         usuario1.setPais("Argentina");
         usuario1.setPassword("123456");
         usuario1.setProvincia("Formosa");
-        usuario1.setTipo("COLABORADOR");
+        usuario1.setTipo("USUARIO");
         usuario1 = usuarioRepository.save(usuario1);
 
-        Emprendimiento emprendimiento = new Emprendimiento();
-        emprendimiento.setNombre("TriviaChaco");
-        emprendimiento.setDescripcion("Aplicación de preguntas y respuestas");
-        emprendimiento.setContenido("Aplicación de preguntas y respuestas sobre la provincialización del Chaco");
-        emprendimiento.setObjetivo(BigDecimal.valueOf(25000));
-        emprendimiento.setPublicado(Boolean.TRUE);
+        Usuario usuario2 = new Usuario();
+        usuario2.setNombre("Jorge");
+        usuario2.setApellido("Garcia");
+        usuario2.setCiudad("Resistencia");
+        usuario2.setEmail("jorgegarcia@gmail.com");
+        usuario2.setPais("Argentina");
+        usuario2.setPassword("159753");
+        usuario2.setProvincia("Chaco");
+        usuario2.setTipo("USUARIO");
+        usuario2 = usuarioRepository.save(usuario2);
 
-        emprendimiento = emprendimientoRepository.save(emprendimiento);
 
         Evento evento = new Evento();
         evento.setDetallesEvento("Para participantes del informatorio 2021. Premio de $100000");
@@ -71,17 +71,31 @@ public class UsuarioRunner implements CommandLineRunner {
         Voto voto = new Voto();
         voto.setUsuario("karinavargas@gmail.com");
         voto.setGeneradoPor("Web");
-        voto = votoRepository.save(voto);
+        //voto = votoRepository.save(voto);
 
         Voto voto1 = new Voto();
-        voto1.setUsuario("karinavargas@gmail.com");
+        voto1.setUsuario("jorgegarcia@gmail.com");
         voto1.setGeneradoPor("Web");
-        voto1 = votoRepository.save(voto1);
+        //voto1 = votoRepository.save(voto1);
 
         Voto voto2 = new Voto();
         voto2.setUsuario("sotelojavier22@gmail.com");
         voto2.setGeneradoPor("Web");
-        voto2 = votoRepository.save(voto2);
+        //voto2 = votoRepository.save(voto2);
+
+        Tag tag = new Tag();
+        tag.setNombre("Juegos");
+        //tag = tagRepository.save(tag);
+
+        Emprendimiento emprendimiento = new Emprendimiento();
+        emprendimiento.setNombre("TriviaChaco");
+        emprendimiento.setDescripcion("Aplicación de preguntas y respuestas");
+        emprendimiento.setContenido("Aplicación de preguntas y respuestas sobre la provincialización del Chaco");
+        emprendimiento.setObjetivo(BigDecimal.valueOf(25000));
+        emprendimiento.setPublicado(Boolean.TRUE);
+        emprendimiento.setVotos(List.of(voto,voto1,voto2));
+        emprendimiento.agregarTag(tag);
+        emprendimiento = emprendimientoRepository.save(emprendimiento);
 
     }
 }

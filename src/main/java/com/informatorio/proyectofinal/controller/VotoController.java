@@ -19,7 +19,10 @@ public class VotoController {
     }
 
     @GetMapping
-    public ResponseEntity<?> findVotos(){
+    public ResponseEntity<?> findVotos(@RequestParam(name = "usuario",required = false) String usuario) {
+        if (usuario != null){
+            return new ResponseEntity(repository.findByUsuario(usuario),HttpStatus.OK);
+        }
         return new ResponseEntity<>(repository.findAll(), HttpStatus.OK);
     }
 

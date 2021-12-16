@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
+
 @RestController
 @RequestMapping(value = "/evento")
 public class EventoController {
@@ -26,5 +28,17 @@ public class EventoController {
     @PostMapping
     public ResponseEntity<?> crear(@RequestBody Evento evento) {
         return new ResponseEntity<>(repository.save(evento),HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
+    public Evento modificarEvento(@PathVariable("id") Long id, @RequestBody Evento evento){
+        Evento eventoExistente = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Evento no econtrado"));
+        eventoExistente.setDetallesEvento(evento.getDetallesEvento());
+        eventoExistente.setFechaApertura(evento.getFechaApertura());
+        eventoExistente.setFechaCierre(evento.getFechaCierre());
+        eventoExistente.setEstado(evento.getEstado());
+        eventoExistente.setPremio(evento.getPremio());
+        return repository.save(eventoExistente);
     }
 }
