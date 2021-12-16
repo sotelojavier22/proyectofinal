@@ -41,4 +41,9 @@ public class EventoController {
         eventoExistente.setPremio(evento.getPremio());
         return repository.save(eventoExistente);
     }
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    public void eliminarEvento(@PathVariable("id") Long id){
+        repository.deleteById(id);
+    }
 }

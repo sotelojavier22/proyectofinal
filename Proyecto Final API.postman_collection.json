@@ -392,6 +392,25 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Eliminar un Evento",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/evento/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"evento",
+								"2"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
