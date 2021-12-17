@@ -180,7 +180,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"nombre\": \"TiendaChaco\",\r\n        \"descripcion\": \"Aplicación para vender productos\",\r\n        \"contenido\": \"Aplicación para tiendas en la provincia del Chaco\",\r\n        \"objetivo\": 22300.00,\r\n        \"publicado\": true,\r\n        \"url\": null,\r\n         \"tags\": [{\"nombre\": \"Juegos\"}]\r\n}",
+							"raw": "{\r\n        \"nombre\": \"TiendaChaco\",\r\n        \"descripcion\": \"Aplicación para vender productos\",\r\n        \"contenido\": \"Aplicación para tiendas en la provincia del Chaco\",\r\n        \"objetivo\": 22300.00,\r\n        \"publicado\": true,\r\n        \"url\": null,\r\n         \"tags\": [{\"nombre\": \"Juegos\"}]\r\n         \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -303,12 +303,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/voto",
+							"raw": "localhost:8080/emprendimiento/1/voto",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"emprendimiento",
+								"1",
 								"voto"
 							]
 						}
