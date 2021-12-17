@@ -47,5 +47,8 @@ public class EmprendimientoController {
         return repository.save(empExistente);
     }
 
-
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    public void eliminarEmprendimiento(@PathVariable("id") Long id){
+        repository.deleteById(id);
+    }
 }

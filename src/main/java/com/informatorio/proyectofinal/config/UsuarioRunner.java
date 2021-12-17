@@ -1,14 +1,9 @@
 package com.informatorio.proyectofinal.config;
 
-import com.informatorio.proyectofinal.entity.*;
 import com.informatorio.proyectofinal.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
 
 @Component
 public class UsuarioRunner implements CommandLineRunner {
@@ -26,6 +21,7 @@ public class UsuarioRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+       /*
         Usuario usuario = new Usuario();
         usuario.setNombre("Javier");
         usuario.setApellido("Sotelo");
@@ -103,6 +99,6 @@ public class UsuarioRunner implements CommandLineRunner {
         voto1 = votoRepository.save(voto1);
         voto2.setEmprendimiento(emprendimiento);
         voto2 = votoRepository.save(voto2);
-
+    */
     }
 }
