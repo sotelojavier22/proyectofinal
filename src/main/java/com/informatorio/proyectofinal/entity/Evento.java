@@ -1,11 +1,10 @@
 package com.informatorio.proyectofinal.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Evento {
@@ -18,7 +17,8 @@ public class Evento {
     private String estado;
     private String suscriptores; //emprendiemientos que se registraron
     private BigDecimal premio;
-
+    @OneToMany(mappedBy = "evento",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Emprendimiento> emprendimientos = new ArrayList<>();
     public Evento() {
     }
 
@@ -81,6 +81,20 @@ public class Evento {
 
     public void setPremio(BigDecimal premio) {
         this.premio = premio;
+    }
+
+    public List<Emprendimiento> getEmprendimientos() {
+        return emprendimientos;
+    }
+
+    public void agregarEmprendimiento(Emprendimiento emprendimiento){
+        emprendimientos.add(emprendimiento);
+        emprendimiento.setEvento(this);
+    }
+
+    public void removerEmprendimiento(Emprendimiento emprendimiento){
+        emprendimientos.remove(emprendimiento);
+        emprendimiento.setEvento(null);
     }
 
     @Override

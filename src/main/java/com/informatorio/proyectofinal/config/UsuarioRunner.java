@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -62,7 +63,7 @@ public class UsuarioRunner implements CommandLineRunner {
         Evento evento = new Evento();
         evento.setDetallesEvento("Para participantes del informatorio 2021. Premio de $100000");
         evento.setEstado("ABIERTO");
-        //evento.setFechaApertura();
+        evento.setFechaApertura(LocalDate.parse("2021-12-16"));
         evento.setPremio(BigDecimal.valueOf(100000));
         //evento.setFechaCierre();
 
@@ -96,6 +97,12 @@ public class UsuarioRunner implements CommandLineRunner {
         emprendimiento.setVotos(List.of(voto,voto1,voto2));
         emprendimiento.agregarTag(tag);
         emprendimiento = emprendimientoRepository.save(emprendimiento);
+        voto.setEmprendimiento(emprendimiento);
+        voto = votoRepository.save(voto);
+        voto1.setEmprendimiento(emprendimiento);
+        voto1 = votoRepository.save(voto1);
+        voto2.setEmprendimiento(emprendimiento);
+        voto2 = votoRepository.save(voto2);
 
     }
 }

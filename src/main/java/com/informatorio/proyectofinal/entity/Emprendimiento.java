@@ -1,5 +1,6 @@
 package com.informatorio.proyectofinal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -23,8 +24,8 @@ public class Emprendimiento {
     private BigDecimal objetivo;
     private Boolean publicado;
     private String url;
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
-    @JoinColumn(name = "emprendimiento_id")
+    @JsonIgnore
+    @OneToMany(mappedBy = "emprendimiento",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Voto> votos;
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(
@@ -33,6 +34,8 @@ public class Emprendimiento {
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     private List<Tag> tags = new ArrayList<>();
+    @ManyToOne
+    private Evento evento;
 
     public Emprendimiento() {
     }
@@ -121,6 +124,21 @@ public class Emprendimiento {
     public void removerTag(Tag tag){
         tags.remove(tag);
         tag.getEmprendimientos().remove(null);
+    }
+    public void agregarVoto(Voto voto) {
+        votos.add(voto);
+    }
+
+    public void removeVotes(Voto voto) {
+        votos.remove(voto);
+    }
+
+    public Evento getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
     }
 
     @Override
